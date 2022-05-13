@@ -4,7 +4,11 @@ module com.example.system_testing {
     requires java.sql;
     requires mysql.connector.java;
 
-
     opens com.example.system_testing to javafx.fxml;
+    opens com.example.system_testing.controller to javafx.fxml;
+    opens com.example.system_testing.database to javafx.fxml;
+    opens com.example.system_testing.essences to javafx.fxml;
+    opens com.example.system_testing.auxiliary to javafx.fxml;
     exports com.example.system_testing;
+    exports com.example.system_testing.auxiliary;
 }

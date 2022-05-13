@@ -1,4 +1,4 @@
-package com.example.system_testing;
+package com.example.system_testing.auxiliary;
 
 /**
  * Константы.

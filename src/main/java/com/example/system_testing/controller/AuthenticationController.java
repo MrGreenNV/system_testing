@@ -1,4 +1,4 @@
-package com.example.system_testing;
+package com.example.system_testing.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,10 +27,7 @@ public class AuthenticationController {
 
     @FXML
     void initialize() {
-        assert authSigIn_button != null : "fx:id=\"authSigIn_button\" was not injected: check your FXML file 'authentication.fxml'.";
-        assert login_field != null : "fx:id=\"login_field\" was not injected: check your FXML file 'authentication.fxml'.";
-        assert password_field != null : "fx:id=\"password_field\" was not injected: check your FXML file 'authentication.fxml'.";
 
     }
-
+    
 }

@@ -12,12 +12,13 @@ public class Authentication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Authentication.class.getResource("authentication.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Hello!");
+        stage.setTitle("System testing");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
+
         launch();
     }
 }

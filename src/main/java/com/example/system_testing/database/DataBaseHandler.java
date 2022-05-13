@@ -1,4 +1,4 @@
-package com.example.system_testing;
+package com.example.system_testing.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
