@@ -5,9 +5,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
 
-public class DeleteUserController {
+public class ChangeDisciplinesController {
 
     @FXML
     private ResourceBundle resources;
@@ -16,16 +16,19 @@ public class DeleteUserController {
     private URL location;
 
     @FXML
-    private AnchorPane ImageButtonHome;
+    private Button addDiscipline_button;
 
     @FXML
-    private MenuButton choiceUser_menuButton;
+    private MenuButton choiceDiscipline_menuButton;
 
     @FXML
-    private Button delete_button;
+    private Button deleteDiscipline_button;
 
     @FXML
-    private Button goBack_buton;
+    private Button goBack_button;
+
+    @FXML
+    private TextField nameDiscipline_textField;
 
     @FXML
     void initialize() {
@@ -33,3 +36,4 @@ public class DeleteUserController {
     }
 
 }
+
