@@ -12,7 +12,7 @@ public class WorkWithScene {
     public void getNewWindow (String window) {
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(Const.URL_PACKAGE + window));
+        loader.setLocation(getClass().getResource(ConstTables.URL_PACKAGE + window));
 
         try {
             loader.load();

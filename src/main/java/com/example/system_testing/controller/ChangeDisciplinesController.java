@@ -1,13 +1,23 @@
 package com.example.system_testing.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.example.system_testing.auxiliary.ConstWindows;
+import com.example.system_testing.auxiliary.WorkWithScene;
+import com.example.system_testing.database.DataBaseHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 
 public class ChangeDisciplinesController {
+
+    WorkWithScene ws = new WorkWithScene();
 
     @FXML
     private ResourceBundle resources;
@@ -19,7 +29,7 @@ public class ChangeDisciplinesController {
     private Button addDiscipline_button;
 
     @FXML
-    private MenuButton choiceDiscipline_menuButton;
+    private ComboBox<String> choiceDiscipline_comboBox;
 
     @FXML
     private Button deleteDiscipline_button;
@@ -33,6 +43,31 @@ public class ChangeDisciplinesController {
     @FXML
     void initialize() {
 
+        ObservableList<String> disciplinesList = FXCollections.observableArrayList(choiceDisciplines());
+        choiceDiscipline_comboBox.setItems(disciplinesList);
+
+        addDiscipline_button.setOnAction(event -> {
+
+        });
+
+        goBack_button.setOnAction(event -> {
+            goBack();
+        });
+
+        deleteDiscipline_button.setOnAction(event -> {
+
+        });
+
+    }
+
+    private void goBack() {
+        goBack_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+    }
+
+    private ArrayList<String> choiceDisciplines() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        return dbHandler.getDisciplinesList();
     }
 
 }

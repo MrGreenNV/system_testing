@@ -4,7 +4,7 @@ package com.example.system_testing.auxiliary;
  * Константы.
  */
 
-public class Const {
+public class ConstTables {
 
     /**
      * Названия таблиц и их колонок.

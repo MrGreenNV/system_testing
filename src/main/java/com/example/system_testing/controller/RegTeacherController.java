@@ -2,6 +2,7 @@ package com.example.system_testing.controller;
 
 import java.util.ArrayList;
 
+import com.example.system_testing.auxiliary.ConstWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import com.example.system_testing.essences.Teacher;
@@ -77,7 +78,7 @@ public class RegTeacherController {
             dbHandler.signUpTeacher(teacher, userID);
             dbHandler.connectTeacherAndDisciplines(teacher);
             regTeacherInSystem_button.getScene().getWindow().hide();
-            ws.getNewWindow("administratorMenu.fxml");
+            ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
         } else {
             System.out.println("Где-то ошибка!");
         }

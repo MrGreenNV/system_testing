@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.example.system_testing.auxiliary.ConstWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import javafx.collections.FXCollections;
@@ -56,12 +57,12 @@ public class DeleteUserController {
         String user = choiceUser_comboBox.getSelectionModel().getSelectedItem();
         dbHandler.deleteUser(user);
         delete_button.getScene().getWindow().hide();
-        ws.getNewWindow("administratorMenu.fxml");
+        ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
     }
 
     private void goBack() {
         goBack_button.getScene().getWindow().hide();
-        ws.getNewWindow("administratorMenu.fxml");
+        ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
     }
 
     private ArrayList<String> choiceUser() {
