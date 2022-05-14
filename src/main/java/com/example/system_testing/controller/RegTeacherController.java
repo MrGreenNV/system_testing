@@ -2,6 +2,7 @@ package com.example.system_testing.controller;
 
 import java.util.ArrayList;
 
+import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import com.example.system_testing.essences.Teacher;
 import com.example.system_testing.essences.User;
@@ -15,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class RegTeacherController {
     ArrayList<String> list = new ArrayList<>();
+    WorkWithScene ws = new WorkWithScene();
 
     @FXML
     private AnchorPane ImageButtonHome;
@@ -59,6 +61,7 @@ public class RegTeacherController {
     }
 
     private void signUpNewTeacher() {
+
         DataBaseHandler dbHandler = new DataBaseHandler();
 
         String fio = fio_teacher_field.getText();
@@ -72,14 +75,13 @@ public class RegTeacherController {
         int userID = dbHandler.getUserID(user);
         if (userID >= 0) {
             dbHandler.signUpTeacher(teacher, userID);
-            for (String s:teacher.getDisciplinesList()
-                 ) {
-                System.out.println(s);
-            }
             dbHandler.connectTeacherAndDisciplines(teacher);
+            regTeacherInSystem_button.getScene().getWindow().hide();
+            ws.getNewWindow("administratorMenu.fxml");
         } else {
             System.out.println("Где-то ошибка!");
         }
+
 
     }
 

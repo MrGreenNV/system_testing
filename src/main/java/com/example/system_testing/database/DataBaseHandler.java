@@ -1,6 +1,7 @@
 package com.example.system_testing.database;
 
 import com.example.system_testing.auxiliary.Const;
+import com.example.system_testing.essences.Student;
 import com.example.system_testing.essences.Teacher;
 import com.example.system_testing.essences.User;
 
@@ -146,6 +147,23 @@ public class DataBaseHandler extends Configs {
         }
     }
 
+    public void signUpStudent(Student student, int userID, int groupID) {
+        String insertDB = "INSERT INTO " + Const.STUDENTS_TABLE + "(" + Const.STUDENTS_FIO + ", " + Const.STUDENTS_USER_ID + ", "
+                + Const.STUDENTS_GROUPS_ID + ")" + "VALUES(?,?,?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setString(1, student.getFio());
+            prSt.setInt(2, userID);
+            prSt.setInt(3, groupID);
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void connectTeacherAndDisciplines(Teacher teacher) {
         String insertBD = "INSERT INTO " + Const.DISCIPLINES_HAS_TEACHERS_TABLE + "(" + Const.DISCIPLINES_HAS_TEACHERS_TEACHERS_ID + ", "
                 + Const.DISCIPLINES_HAS_TEACHERS_DISCIPLINES_ID + ")" + "VALUES(?,?)";
@@ -243,6 +261,36 @@ public class DataBaseHandler extends Configs {
             }
             try {
                 id = resultSet.getInt(Const.DISCIPLINES_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+
+    public int getGroupID(String group) {
+
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + Const.GROUPS_TABLE +
+                " WHERE " + Const.GROUPS_NUMBER + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setString(1, group);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(Const.GROUPS_ID);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

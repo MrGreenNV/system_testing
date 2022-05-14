@@ -1,4 +1,93 @@
 package com.example.system_testing.controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import com.example.system_testing.auxiliary.WorkWithScene;
+import com.example.system_testing.database.DataBaseHandler;
+import com.example.system_testing.essences.Student;
+import com.example.system_testing.essences.Teacher;
+import com.example.system_testing.essences.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+
 public class RegStudentController {
+    WorkWithScene ws = new WorkWithScene();
+    String group;
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private AnchorPane ImageButtonHome;
+
+    @FXML
+    private TextField fio_student_field;
+
+    @FXML
+    private TextField login_student_field;
+
+    @FXML
+    private ComboBox<String> numberGroup_comboBox;
+
+    @FXML
+    private TextField password_student_field;
+
+    @FXML
+    private Button regStudentInSystemButton;
+
+    @FXML
+    void initialize() {
+
+        ObservableList<String> groupsList = FXCollections.observableArrayList(choiceGroups());
+        numberGroup_comboBox.setItems(groupsList);
+
+        regStudentInSystemButton.setOnAction(event -> {
+            signUpNewStudent();
+        });
+
+    }
+
+    private ArrayList<String> choiceGroups() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        return dbHandler.getGroupsList();
+    }
+
+    private void signUpNewStudent() {
+
+        DataBaseHandler dbHandler = new DataBaseHandler();
+
+        String fio = fio_student_field.getText();
+        String login = login_student_field.getText();
+        String password = password_student_field.getText();
+
+        Student student = new Student(fio, group);
+        User user = new User(login, password, "student");
+
+        dbHandler.signUpUser(user);
+        int userID = dbHandler.getUserID(user);
+        System.out.println(userID);
+        group = numberGroup_comboBox.getSelectionModel().getSelectedItem();
+        int groupID = dbHandler.getGroupID(group);
+        System.out.println(groupID);
+        if (userID >= 0 && groupID >= 0) {
+            dbHandler.signUpStudent(student, userID, groupID);
+            regStudentInSystemButton.getScene().getWindow().hide();
+            ws.getNewWindow("administratorMenu.fxml");
+        } else {
+            System.out.println("Где-то ошибка!");
+        }
+
+    }
+
 }
+
