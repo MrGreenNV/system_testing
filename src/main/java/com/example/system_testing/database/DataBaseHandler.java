@@ -445,7 +445,6 @@ public class DataBaseHandler extends Configs {
      * @param discipline - наименование дисциплины.
      */
     public void addDiscipline(String discipline) {
-
         String insertDB = "INSERT INTO " + ConstTables.DISCIPLINES_TABLE + "(" + ConstTables.DISCIPLINES_NAME + ")" + "VALUES(?)";
 
         try {
@@ -471,6 +470,41 @@ public class DataBaseHandler extends Configs {
         try {
             PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
             prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Удаление группы из БД.
+     * @param group - номер группы.
+     */
+    public void deleteGroup(String group) {
+        int groupID = getGroupID(group);
+
+        String deleteBD = "DELETE FROM " + ConstTables.GROUPS_TABLE + " WHERE " +
+                ConstTables.GROUPS_ID + " = " + groupID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Добавление группы в БД.
+     * @param group - номер группы.
+     */
+    public void addGroup(String group) {
+        String insertDB = "INSERT INTO " + ConstTables.GROUPS_TABLE + "(" + ConstTables.GROUPS_NUMBER + ")" + "VALUES(?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setString(1, group);
+
+            prSt.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
