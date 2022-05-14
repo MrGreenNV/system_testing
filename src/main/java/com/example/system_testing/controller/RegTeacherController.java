@@ -1,28 +1,29 @@
 package com.example.system_testing.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
 import com.example.system_testing.database.DataBaseHandler;
 import com.example.system_testing.essences.Teacher;
+import com.example.system_testing.essences.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class RegTeacherController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+    ArrayList<String> list = new ArrayList<>();
 
     @FXML
     private AnchorPane ImageButtonHome;
 
     @FXML
-    private TextField discipline_teacher_field;
+    private Button addDiscipline_button;
+
+    @FXML
+    private ComboBox<String> choiceDiscipline_comboBox;
 
     @FXML
     private TextField fio_teacher_field;
@@ -38,21 +39,48 @@ public class RegTeacherController {
 
     @FXML
     void initialize() {
+
+        ObservableList<String> disciplinesList = FXCollections.observableArrayList(choiceDisciplines());
+        choiceDiscipline_comboBox.setItems(disciplinesList);
+
+        addDiscipline_button.setOnAction(event -> {
+            list.add(choiceDiscipline_comboBox.getSelectionModel().getSelectedItem());
+        });
+
         regTeacherInSystem_button.setOnAction(event -> {
             signUpNewTeacher();
         });
 
     }
 
+    private ArrayList<String> choiceDisciplines() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        return dbHandler.getDisciplinesList();
+    }
+
     private void signUpNewTeacher() {
         DataBaseHandler dbHandler = new DataBaseHandler();
 
         String fio = fio_teacher_field.getText();
-        String discipline = discipline_teacher_field.getText();
         String login = login_teacher_field.getText();
         String password = password_teacher_field.getText();
 
-        //Teacher teacher = new Teacher(fio, )
+        Teacher teacher = new Teacher(fio, list);
+        User user = new User(login, password, "teacher");
+
+        dbHandler.signUpUser(user);
+        int userID = dbHandler.getUserID(user);
+        if (userID >= 0) {
+            dbHandler.signUpTeacher(teacher, userID);
+            for (String s:teacher.getDisciplinesList()
+                 ) {
+                System.out.println(s);
+            }
+            dbHandler.connectTeacherAndDisciplines(teacher);
+        } else {
+            System.out.println("Где-то ошибка!");
+        }
+
     }
 
 }

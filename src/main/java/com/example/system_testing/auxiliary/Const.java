@@ -64,7 +64,7 @@ public class Const {
     public static final String SCHEDULES_GROUPS_ID = "tbl_groups_id";
     public static final String SCHEDULES_TESTES_ID = "tbl_testes_id";
 
-    public static final String DISCIPLINES_HAS_TEACHERS_TABLE = "tbs_disciplines_has_tbl_teachers";
+    public static final String DISCIPLINES_HAS_TEACHERS_TABLE = "tbl_teachers_has_tbs_disciplines";
     public static final String DISCIPLINES_HAS_TEACHERS_DISCIPLINES_ID = "tbs_disciplines_id";
     public static final String DISCIPLINES_HAS_TEACHERS_TEACHERS_ID = "tbl_teachers_id";
 

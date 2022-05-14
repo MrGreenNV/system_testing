@@ -12,6 +12,9 @@ public class AdministratorMenuController {
     WorkWithScene ws = new WorkWithScene();
 
     @FXML
+    private Button changeGroups_button;
+
+    @FXML
     private Button changeDisciplines_button;
 
     @FXML
@@ -52,6 +55,10 @@ public class AdministratorMenuController {
             changeDisciplines();
         });
 
+        changeGroups_button.setOnAction(event -> {
+            changeGroups();
+        });
+
         exitFromSystem_button.setOnAction(event -> {
             exitFromSystem();
         });
@@ -81,6 +88,11 @@ public class AdministratorMenuController {
     private void changeDisciplines() {
         changeDisciplines_button.getScene().getWindow().hide();
         ws.getNewWindow("changeDisciplines.fxml");
+    }
+
+    private void changeGroups() {
+        changeGroups_button.getScene().getWindow().hide();
+        ws.getNewWindow("changGroups.fxml");
     }
 
     private void exitFromSystem() {
