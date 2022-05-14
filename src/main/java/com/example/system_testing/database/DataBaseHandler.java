@@ -438,6 +438,41 @@ public class DataBaseHandler extends Configs {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     * Добавление дисциплины в БД.
+     * @param discipline - наименование дисциплины.
+     */
+    public void addDiscipline(String discipline) {
+
+        String insertDB = "INSERT INTO " + ConstTables.DISCIPLINES_TABLE + "(" + ConstTables.DISCIPLINES_NAME + ")" + "VALUES(?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setString(1, discipline);
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Удаление дисциплины из БД.
+     * @param discipline - наименование дисциплины.
+     */
+    public void deleteDiscipline(String discipline) {
+        int disciplineID = getDisciplineID(discipline);
+
+        String deleteBD = "DELETE FROM " + ConstTables.DISCIPLINES_TABLE + " WHERE " +
+                ConstTables.DISCIPLINES_ID + " = " + disciplineID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
