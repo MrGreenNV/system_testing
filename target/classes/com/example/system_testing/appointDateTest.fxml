@@ -18,9 +18,9 @@
                 </Label>
                 <TextField fx:id="dateTest" layoutX="261.0" layoutY="123.0" promptText="Дата теста" />
                 <Button fx:id="appointTestButton" layoutX="212.0" layoutY="190.0" mnemonicParsing="false" text="Назначить тест" />
-            <ComboBox fx:id="choiceTestBox" layoutX="490.0" layoutY="57.0" prefHeight="25.0" prefWidth="149.0" promptText="Выберите тест" />
-            <Button fx:id="goBackButton" layoutX="362.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Назад" />
-            <ComboBox fx:id="choiceGroupBox" layoutX="490.0" layoutY="98.0" prefHeight="25.0" prefWidth="149.0" promptText="Выберите группу" />
+                <ComboBox fx:id="choiceTestBox" layoutX="490.0" layoutY="57.0" prefHeight="25.0" prefWidth="149.0" promptText="Выберите тест" />
+                <Button fx:id="goBackButton" layoutX="362.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Назад" />
+                <ComboBox fx:id="choiceGroupBox" layoutX="490.0" layoutY="98.0" prefHeight="25.0" prefWidth="149.0" promptText="Выберите группу" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">

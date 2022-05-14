@@ -32,11 +32,12 @@ public class ConstTables {
     public static final String ANSWERS_ID = "id";
     public static final String ANSWERS_NAME = "name";
     public static final String ANSWERS_IS_TRUE = "is_true";
+    public static final String ANSWERS_QUESTION_ID = "tbl_questions_id";
 
     public static final String QUESTIONS_TABLE = "tbl_questions";
     public static final String QUESTIONS_ID = "id";
     public static final String QUESTIONS_NAME = "name";
-    public static final String QUESTIONS_ANSWERS_ID = "tbl_answers_id";
+    public static final String QUESTIONS_TESTES_ID = "tbl_testes_id";
 
     public static final String DISCIPLINES_TABLE = "tbs_disciplines";
     public static final String DISCIPLINES_ID = "id";
@@ -46,7 +47,6 @@ public class ConstTables {
     public static final String TESTS_ID = "id";
     public static final String TESTS_NAME = "name";
     public static final String TESTS_DISCIPLINES_ID = "tbs_disciplines_id";
-    public static final String TESTS_QUESTIONS_ID = "tbl_questions_id";
 
     public static final String GROUPS_TABLE = "tbl_groups";
     public static final String GROUPS_ID = "id";

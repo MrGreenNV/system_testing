@@ -1,9 +1,7 @@
 package com.example.system_testing.database;
 
 import com.example.system_testing.auxiliary.ConstTables;
-import com.example.system_testing.essences.Student;
-import com.example.system_testing.essences.Teacher;
-import com.example.system_testing.essences.User;
+import com.example.system_testing.essences.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -73,7 +71,7 @@ public class DataBaseHandler extends Configs {
 
         while (true) {
             try {
-                assert resultSet != null;
+                //assert resultSet != null;
                 if (!resultSet.next()) {
                     break;
                 }
@@ -357,6 +355,39 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Получение ID преподавателя из БД.
+     * @param userID - ID пользователя.
+     * @return - возвращает ID преподавателя.
+     */
+    public int getTeacherID(int userID) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.TEACHERS_TABLE +
+                " WHERE " + ConstTables.TEACHERS_USER_ID + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, userID);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(ConstTables.TEACHERS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    /**
      * Получение ID дисциплины из БД.
      * @param discipline - название дисциплины.
      * @return - возвращает целое число.
@@ -395,7 +426,6 @@ public class DataBaseHandler extends Configs {
      * @return - возвращает целое число.
      */
     public int getGroupID(String group) {
-
         int id = -1;
         ResultSet resultSet = null;
         String selectBD = "SELECT * FROM " + ConstTables.GROUPS_TABLE +
@@ -415,6 +445,67 @@ public class DataBaseHandler extends Configs {
             }
             try {
                 id = resultSet.getInt(ConstTables.GROUPS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    /**
+     * Получение ID теста из БД.
+     * @param nameTest - имя теста.
+     * @return - возвращает ID теста.
+     */
+    public int getTestID(String nameTest) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.TESTS_TABLE +
+                " WHERE " + ConstTables.TESTS_NAME + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setString(1, nameTest);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(ConstTables.TESTS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    public int getQuestionID(String nameQuestion) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.QUESTIONS_TABLE +
+                " WHERE " + ConstTables.QUESTIONS_NAME + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setString(1, nameQuestion);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(ConstTables.QUESTIONS_ID);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -508,5 +599,134 @@ public class DataBaseHandler extends Configs {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Создание нового теста.
+     * @param test - тест.
+     */
+    public void createTest(Test test) {
+
+        String insertDB = "INSERT INTO " + ConstTables.TESTS_TABLE + "(" + ConstTables.TESTS_NAME + ", " +
+                ConstTables.TESTS_DISCIPLINES_ID + ")" + "VALUES(?, ?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setString(1, test.getNameTest());
+            prSt.setInt(2, getDisciplineID(test.getDiscipline()));
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Добавление вопроса и ответов на него в БД.
+     * @param test  - тест.
+     * @param question - вопрос.
+     */
+    public void addQuestionInBD(Test test, Question question) {
+        String insertQuestionDB = "INSERT INTO " + ConstTables.QUESTIONS_TABLE + "(" + ConstTables.QUESTIONS_NAME + ", " +
+                ConstTables.QUESTIONS_TESTES_ID + ")" + "VALUES(?, ?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertQuestionDB);
+
+            prSt.setString(1, question.getNameQuestion());
+            prSt.setInt(2, getTestID(test.getNameTest()));
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (Answer answer: question.getAnswerList()
+             ) {
+            String insertAnswerBD =  "INSERT INTO " + ConstTables.ANSWERS_TABLE + "(" + ConstTables.ANSWERS_NAME + ", " +
+                    ConstTables.ANSWERS_IS_TRUE + ", " + ConstTables.ANSWERS_QUESTION_ID + ")" + "VALUES(?, ?, ?)";
+            try {
+                PreparedStatement prSt = getDbConnection().prepareStatement(insertAnswerBD);
+
+                prSt.setString(1, answer.getNameAnswer());
+                prSt.setBoolean(2, answer.getIsTrueAnswer());
+                prSt.setInt(3, getQuestionID(question.getNameQuestion()));
+
+                prSt.executeUpdate();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Получение списка дисциплин для конкретного преподавателя.
+     * @param disciplinesList - входящий список (пустой)ю
+     * @param userID - ID пользователя.
+     * @return - возвращает список дисциплин.
+     */
+    public ArrayList<String> getDisciplinesListFromTeacher(ArrayList<String> disciplinesList, int userID) {
+
+        int teacherID = getTeacherID(userID);
+        ResultSet resultSetOne = null;
+        ResultSet resultSetTwo = null;
+
+        String selectBD = "SELECT " + ConstTables.DISCIPLINES_HAS_TEACHERS_DISCIPLINES_ID + " FROM " +
+                ConstTables.DISCIPLINES_HAS_TEACHERS_TABLE  +
+                " WHERE " + ConstTables.DISCIPLINES_HAS_TEACHERS_TEACHERS_ID + " =?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, teacherID);
+            resultSetOne = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                //assert resultSetOne != null;
+                if (!resultSetOne.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+
+                int disciplineID = resultSetOne.getInt(ConstTables.DISCIPLINES_HAS_TEACHERS_DISCIPLINES_ID);
+                String selectDisciplineBD = "SELECT " + ConstTables.DISCIPLINES_NAME + " FROM " +
+                        ConstTables.DISCIPLINES_TABLE  +
+                        " WHERE " + ConstTables.DISCIPLINES_ID + " =?";
+
+                try {
+                    PreparedStatement prSt = getDbConnection().prepareStatement(selectDisciplineBD);
+                    prSt.setInt(1, disciplineID);
+                    resultSetTwo = prSt.executeQuery();
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                while (true) {
+                    try {
+                        //assert resultSetTwo != null;
+                        if (!resultSetTwo.next()) {
+                            break;
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    disciplinesList.add(resultSetTwo.getString(ConstTables.DISCIPLINES_NAME));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return disciplinesList;
+
     }
 }

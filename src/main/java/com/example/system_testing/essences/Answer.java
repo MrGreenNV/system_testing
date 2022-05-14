@@ -20,7 +20,7 @@ public class Answer {
         this.nameAnswer = nameAnswer;
     }
 
-    public boolean isTrueAnswer() {
+    public boolean getIsTrueAnswer() {
         return isTrueAnswer;
     }
 
