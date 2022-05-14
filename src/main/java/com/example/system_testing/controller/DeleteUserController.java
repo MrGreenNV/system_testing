@@ -1,13 +1,21 @@
 package com.example.system_testing.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.example.system_testing.auxiliary.WorkWithScene;
+import com.example.system_testing.database.DataBaseHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
 public class DeleteUserController {
+
+    WorkWithScene ws = new WorkWithScene();
 
     @FXML
     private ResourceBundle resources;
@@ -19,17 +27,46 @@ public class DeleteUserController {
     private AnchorPane ImageButtonHome;
 
     @FXML
-    private MenuButton choiceUser_menuButton;
+    private ComboBox<String> choiceUser_comboBox;
 
     @FXML
     private Button delete_button;
 
     @FXML
-    private Button goBack_buton;
+    private Button goBack_button;
 
     @FXML
     void initialize() {
 
+        ObservableList<String> groupsList = FXCollections.observableArrayList(choiceUser());
+        choiceUser_comboBox.setItems(groupsList);
+
+        goBack_button.setOnAction(event -> {
+            goBack();
+        });
+
+        delete_button.setOnAction(event -> {
+            delete();
+        });
+
+    }
+
+    private void delete() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        String user = choiceUser_comboBox.getSelectionModel().getSelectedItem();
+        dbHandler.deleteUser(user);
+        delete_button.getScene().getWindow().hide();
+        ws.getNewWindow("administratorMenu.fxml");
+    }
+
+    private void goBack() {
+        goBack_button.getScene().getWindow().hide();
+        ws.getNewWindow("administratorMenu.fxml");
+    }
+
+    private ArrayList<String> choiceUser() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        return dbHandler.getUserList();
     }
 
 }

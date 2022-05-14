@@ -113,6 +113,40 @@ public class DataBaseHandler extends Configs {
         return list;
     }
 
+    public ArrayList<String> getUserList() {
+
+        ResultSet resultSet = null;
+        ArrayList<String> list = new ArrayList<>();
+        String selectBD = "SELECT " + Const.USERS_LOGIN + " FROM " + Const.USERS_TABLE;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                list.add(resultSet.getString(Const.USERS_LOGIN));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
 
     public void signUpUser(User user) {
         String insertDB = "INSERT INTO " + Const.USERS_TABLE + "(" + Const.USERS_LOGIN + ", " + Const.USERS_PASSWORD +
@@ -193,6 +227,34 @@ public class DataBaseHandler extends Configs {
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
             prSt.setString(1, user.getUserLogin());
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(Const.USERS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    public int getUserID(String login) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + Const.USERS_TABLE +
+                " WHERE " + Const.USERS_LOGIN + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setString(1, login);
             resultSet = prSt.executeQuery();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -297,5 +359,41 @@ public class DataBaseHandler extends Configs {
 
         }
         return id;
+    }
+
+
+    public void deleteUser(String user) {
+        int userID = getUserID(user);
+
+        String deleteBD = "DELETE FROM " + Const.USERS_TABLE + " WHERE " +
+                Const.USERS_ID + " = " + userID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        /*
+        String deleteStudentBD = "DELETE FROM " + Const.STUDENTS_TABLE + " WHERE " +
+                Const.STUDENTS_USER_ID + " = " + userID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteStudentBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String deleteTeacherBD = "DELETE FROM " + Const.TEACHERS_TABLE + " WHERE " +
+                Const.TEACHERS_USER_ID + " = " + userID;
+        try {
+            PreparedStatement prSt2 = getDbConnection().prepareStatement(deleteTeacherBD);
+            prSt2.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+         */
     }
 }

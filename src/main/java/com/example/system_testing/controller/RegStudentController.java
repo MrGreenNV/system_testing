@@ -75,10 +75,10 @@ public class RegStudentController {
 
         dbHandler.signUpUser(user);
         int userID = dbHandler.getUserID(user);
-        System.out.println(userID);
+
         group = numberGroup_comboBox.getSelectionModel().getSelectedItem();
         int groupID = dbHandler.getGroupID(group);
-        System.out.println(groupID);
+
         if (userID >= 0 && groupID >= 0) {
             dbHandler.signUpStudent(student, userID, groupID);
             regStudentInSystemButton.getScene().getWindow().hide();
