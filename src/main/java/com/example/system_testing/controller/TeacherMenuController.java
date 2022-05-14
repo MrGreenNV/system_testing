@@ -9,15 +9,6 @@ import javafx.scene.layout.AnchorPane;
 public class TeacherMenuController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane ImageButtonHome;
-
-    @FXML
     private Button appointTest_button;
 
     @FXML
@@ -31,6 +22,22 @@ public class TeacherMenuController {
 
     @FXML
     void initialize() {
+
+        createNewTest_button.setOnAction(event -> {
+
+        });
+
+        updateDropTest_button.setOnAction(event -> {
+
+        });
+
+        appointTest_button.setOnAction(event -> {
+
+        });
+
+        exitFromSystem_button.setOnAction(event -> {
+
+        });
 
     }
 

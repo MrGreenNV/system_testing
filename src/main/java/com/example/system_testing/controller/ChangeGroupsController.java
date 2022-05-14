@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.example.system_testing.auxiliary.ConstWindows;
+import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import javafx.collections.FXCollections;
@@ -48,7 +48,7 @@ public class ChangeGroupsController {
         addGroup_button.setOnAction(event -> {
             addGroupToBD();
             addGroup_button.getScene().getWindow().hide();
-            ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+            ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
         });
 
         goBack_button.setOnAction(event -> {
@@ -58,7 +58,7 @@ public class ChangeGroupsController {
         deleteGroup_button.setOnAction(event -> {
             delete();
             deleteGroup_button.getScene().getWindow().hide();
-            ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+            ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
         });
     }
 
@@ -76,7 +76,7 @@ public class ChangeGroupsController {
 
     private void goBack() {
         goBack_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+        ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
     }
 
     private ArrayList<String> choiceGroups() {

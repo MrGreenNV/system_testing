@@ -1,6 +1,6 @@
 package com.example.system_testing.auxiliary;
 
-public class ConstWindows {
+public class ConstNameWindows {
 
     public static final String WINDOW_AUTHENTICATION = "authentication.fxml";
     public static final String WINDOW_ADMINISTRATOR_MENU = "administratorMenu.fxml";
@@ -12,5 +12,8 @@ public class ConstWindows {
     public static final String WINDOW_SHOW_RESULT_TEST = "showResultTest.fxml";
     public static final String WINDOW_STUDENT_MENU = "studentMenu.fxml";
     public static final String WINDOW_TEACHER_MENU = "teacherMenu.fxml";
+    public static final String WINDOW_APPOINT_DATE_TEST = "appointDateTest.fxml";
+    public static final String WINDOW_CHANGE_DROP_TEST = "changeDropTest.fxml";
+    public static final String WINDOW_CREATE_NEW_TEST = "createNewTest.fxml";
 
 }

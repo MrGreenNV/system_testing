@@ -15,8 +15,8 @@
                         <Font name="Times New Roman" size="20.0" />
                     </font>
                 </Label>
-            <TextField fx:id="nameNewTest" layoutX="261.0" layoutY="123.0" promptText="Название теста" />
-            <Button fx:id="createNewTestButton" layoutX="294.0" layoutY="188.0" mnemonicParsing="false" text="Создать тест" />
+                <TextField fx:id="nameNewTest" layoutX="261.0" layoutY="123.0" promptText="Название теста" />
+                <Button fx:id="createNewTestButton" layoutX="294.0" layoutY="188.0" mnemonicParsing="false" text="Создать тест" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">

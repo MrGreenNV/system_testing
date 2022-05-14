@@ -1,6 +1,6 @@
 package com.example.system_testing.controller;
 
-import com.example.system_testing.auxiliary.ConstWindows;
+import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -65,37 +65,37 @@ public class AdministratorMenuController {
 
     private void regTeacher() {
         regTeacher_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_REG_TEACHER);
+        ws.getNewWindow(ConstNameWindows.WINDOW_REG_TEACHER);
     }
 
     private void regStudent() {
         regStudent_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_REG_STUDENT);
+        ws.getNewWindow(ConstNameWindows.WINDOW_REG_STUDENT);
     }
 
     private void deleteUser() {
         deleteUser_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_DELETE_USER);
+        ws.getNewWindow(ConstNameWindows.WINDOW_DELETE_USER);
     }
 
     private void showResultTest(){
         showResultTest_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_SHOW_RESULT_TEST);
+        ws.getNewWindow(ConstNameWindows.WINDOW_SHOW_RESULT_TEST);
     }
 
     private void changeDisciplines() {
         changeDisciplines_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_CHANGE_DISCIPLINES);
+        ws.getNewWindow(ConstNameWindows.WINDOW_CHANGE_DISCIPLINES);
     }
 
     private void changeGroups() {
         changeGroups_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_CHANGE_GROUPS);
+        ws.getNewWindow(ConstNameWindows.WINDOW_CHANGE_GROUPS);
     }
 
     private void exitFromSystem() {
         exitFromSystem_button.getScene().getWindow().hide();
-        ws.getNewWindow(ConstWindows.WINDOW_AUTHENTICATION);
+        ws.getNewWindow(ConstNameWindows.WINDOW_AUTHENTICATION);
     }
 
 }

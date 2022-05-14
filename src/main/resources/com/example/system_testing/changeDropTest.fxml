@@ -15,10 +15,10 @@
                     </font>
                 </Label>
                 <Button fx:id="goBackButton" layoutX="265.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Назад" />
-            <Button fx:id="addQuestionButton" layoutX="265.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Добавить вопрос" />
-            <Button fx:id="deleteQuestionButton" layoutX="265.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Удалить вопрос" />
-            <Button fx:id="deleteTestButton" layoutX="265.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Удалить тест" />
-            <Button fx:id="showTestButton" layoutX="265.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Посмотреть тест" />
+                <Button fx:id="addQuestionButton" layoutX="265.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Добавить вопрос" />
+                <Button fx:id="deleteQuestionButton" layoutX="265.0" layoutY="122.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Удалить вопрос" />
+                <Button fx:id="deleteTestButton" layoutX="265.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Удалить тест" />
+                <Button fx:id="showTestButton" layoutX="265.0" layoutY="55.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="141.0" text="Посмотреть тест" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">

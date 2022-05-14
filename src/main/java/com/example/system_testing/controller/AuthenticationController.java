@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.example.system_testing.auxiliary.ConstTables;
-import com.example.system_testing.auxiliary.ConstWindows;
+import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.Shake;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -79,15 +79,15 @@ public class AuthenticationController {
                 if (resultSet.getString(ConstTables.USERS_ROLE).equalsIgnoreCase("administrator")) {
                     authSigIn_button.getScene().getWindow().hide();
                     counter++;
-                    ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+                    ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
                 } else if (resultSet.getString(ConstTables.USERS_ROLE).equalsIgnoreCase("teacher")) {
                     authSigIn_button.getScene().getWindow().hide();
                     counter++;
-                    ws.getNewWindow(ConstWindows.WINDOW_TEACHER_MENU);
+                    ws.getNewWindow(ConstNameWindows.WINDOW_TEACHER_MENU);
                 } else if (resultSet.getString(ConstTables.USERS_ROLE).equalsIgnoreCase("student")) {
                     authSigIn_button.getScene().getWindow().hide();
                     counter++;
-                    ws.getNewWindow(ConstWindows.WINDOW_STUDENT_MENU);
+                    ws.getNewWindow(ConstNameWindows.WINDOW_STUDENT_MENU);
                 }
 
             } catch (SQLException e) {

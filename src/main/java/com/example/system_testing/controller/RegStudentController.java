@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.example.system_testing.auxiliary.ConstWindows;
+import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import com.example.system_testing.essences.Student;
-import com.example.system_testing.essences.Teacher;
 import com.example.system_testing.essences.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,7 +82,7 @@ public class RegStudentController {
         if (userID >= 0 && groupID >= 0) {
             dbHandler.signUpStudent(student, userID, groupID);
             regStudentInSystemButton.getScene().getWindow().hide();
-            ws.getNewWindow(ConstWindows.WINDOW_ADMINISTRATOR_MENU);
+            ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
         } else {
             System.out.println("Где-то ошибка!");
         }
