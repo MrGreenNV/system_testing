@@ -1,8 +1,9 @@
 package com.example.system_testing.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.example.system_testing.auxiliary.Const;
+import com.example.system_testing.essences.User;
+
+import java.sql.*;
 
 public class DataBaseHandler extends Configs {
     Connection dbConnection;
@@ -21,5 +22,25 @@ public class DataBaseHandler extends Configs {
 
         return dbConnection;
     }
+
+    public ResultSet getUser(User user) {
+
+        ResultSet resultSet = null;
+
+        String selectDB = "SELECT * FROM " + Const.USERS_TABLE + " WHERE " + Const.USERS_LOGIN + "=? AND " + Const.USERS_PASSWORD + "=?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectDB);
+            prSt.setString(1, user.getUserLogin());
+            prSt.setString(2, user.getUserPassword());
+
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
+    }
+
 
 }

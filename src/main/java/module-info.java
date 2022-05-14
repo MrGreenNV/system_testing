@@ -11,4 +11,7 @@ module com.example.system_testing {
     opens com.example.system_testing.auxiliary to javafx.fxml;
     exports com.example.system_testing;
     exports com.example.system_testing.auxiliary;
+    exports com.example.system_testing.controller;
+    exports com.example.system_testing.database;
+    exports com.example.system_testing.essences;
 }

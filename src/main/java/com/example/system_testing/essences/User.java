@@ -1,12 +1,12 @@
 package com.example.system_testing.essences;
 
 public class User {
-    private String userName;
+    private String userLogin;
     private String userPassword;
     private String userRole;
 
     public User(String userName, String userPassword, String userRole) {
-        this.userName = userName;
+        this.userLogin = userName;
         this.userPassword = userPassword;
         this.userRole = userRole;
     }
@@ -14,12 +14,12 @@ public class User {
     public User() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
     public String getUserPassword() {

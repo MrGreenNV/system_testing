@@ -9,6 +9,7 @@ public class Const {
     /**
      * Названия таблиц и их колонок.
      */
+    public static final String URL_PACKAGE = "/com/example/system_testing/";
 
     public static final String USERS_TABLE = "tbl_users";
     public static final String USERS_ID = "id";

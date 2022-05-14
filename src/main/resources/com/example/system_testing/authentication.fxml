@@ -11,26 +11,14 @@
     <children>
         <AnchorPane layoutX="14.0" layoutY="115.0" prefHeight="271.0" prefWidth="671.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Button fx:id="authSigIn_button" layoutX="256.0" layoutY="198.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="158.0" text="Вход в ситему">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Button>
-                <PasswordField fx:id="password_field" layoutX="195.0" layoutY="136.0" prefHeight="27.0" prefWidth="280.0" promptText="Пароль">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </PasswordField>
-                <TextField fx:id="login_field" layoutX="195.0" layoutY="75.0" prefHeight="44.0" prefWidth="280.0" promptText="Логин">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </TextField>
                 <Label layoutX="280.0" layoutY="26.0" text="Авторизация" textFill="#393565">
                     <font>
                         <Font name="Times New Roman" size="20.0" />
                     </font>
                 </Label>
+            <TextField fx:id="login_field" layoutX="224.0" layoutY="77.0" prefHeight="40.0" prefWidth="225.0" promptText="Логин" />
+            <PasswordField fx:id="password_field" layoutX="224.0" layoutY="136.0" prefHeight="40.0" prefWidth="225.0" promptText="Пароль" />
+            <Button fx:id="authSigIn_button" layoutX="290.0" layoutY="210.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="93.0" text="Войти" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">
