@@ -304,6 +304,32 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Запись назначенной даты теста для группы в БД.
+     * @param date - дата теста.
+     * @param nameTest - название теста.
+     * @param numberGroup - название группы.
+     */
+    public void appointDateInDB(String date, String nameTest, String numberGroup) {
+        int testID = getTestID(nameTest);
+        int groupID = getGroupID(numberGroup);
+
+        String insertDB = "INSERT INTO " + ConstTables.SCHEDULES_TABLE + "(" + ConstTables.SCHEDULES_DATE + ", " + ConstTables.SCHEDULES_GROUPS_ID + ", "
+                + ConstTables.SCHEDULES_TESTES_ID + ")" + "VALUES(?,?,?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setString(1, date);
+            prSt.setInt(2, groupID);
+            prSt.setInt(3, testID);
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Запись данных о дисциплинах, которые ведут преподаватели.
      * @param teacher - преподаватель.
      */
@@ -930,5 +956,4 @@ public class DataBaseHandler extends Configs {
 
         return test;
     }
-
 }
