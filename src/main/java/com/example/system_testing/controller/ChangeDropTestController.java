@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
-import com.example.system_testing.essences.Answer;
 import com.example.system_testing.essences.Question;
+import com.example.system_testing.essences.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ public class ChangeDropTestController {
     String nameTest;
     String nameQuestion;
     ArrayList<String> questionsList = new ArrayList<>();
+    Test test;
 
     @FXML
     private Button addQuestion_button;
@@ -74,27 +75,23 @@ public class ChangeDropTestController {
                 String nameQuestion = choiceQuestion_comboBox.getSelectionModel().getSelectedItem();
                 nameQuestion_text.setText(nameQuestion);
 
-                Question question = new Question();
-                question = getQuestion(nameQuestion);
+                if (!(nameQuestion.equals(""))) {
+                    Question question = new Question();
+                    question = getQuestion(nameQuestion);
 
-                nameAnswerOne_text.setText(question.getAnswerList().get(0).getNameAnswer() + "\t" +
-                        question.getAnswerList().get(0).getIsTrueAnswer());
-                nameAnswerTwo_text.setText(question.getAnswerList().get(1).getNameAnswer() + "\t" +
-                        question.getAnswerList().get(1).getIsTrueAnswer());
-                nameAnswerThree_text.setText(question.getAnswerList().get(2).getNameAnswer() + "\t" +
-                        question.getAnswerList().get(2).getIsTrueAnswer());
-                nameAnswerFour_text.setText(question.getAnswerList().get(3).getNameAnswer() + "\t" +
-                        question.getAnswerList().get(3).getIsTrueAnswer());
+                    nameAnswerOne_text.setText(question.getAnswerList().get(0).getNameAnswer() + "\t" +
+                            question.getAnswerList().get(0).getIsTrueAnswer());
+                    nameAnswerTwo_text.setText(question.getAnswerList().get(1).getNameAnswer() + "\t" +
+                            question.getAnswerList().get(1).getIsTrueAnswer());
+                    nameAnswerThree_text.setText(question.getAnswerList().get(2).getNameAnswer() + "\t" +
+                            question.getAnswerList().get(2).getIsTrueAnswer());
+                    nameAnswerFour_text.setText(question.getAnswerList().get(3).getNameAnswer() + "\t" +
+                            question.getAnswerList().get(3).getIsTrueAnswer());
+                }
 
             });
 
-
-
         });
-
-
-
-
 
         addQuestion_button.setOnAction(event -> {
             goToWindowsAddQuestion();
@@ -131,14 +128,29 @@ public class ChangeDropTestController {
 
     private void goToWindowsAddQuestion() {
 
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        test = dbHandler.getTest(nameTest);
+        addQuestion_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_CREATE_QUESTION, test);
     }
 
     private void deleteQuestion() {
 
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        String nameQuestion = choiceQuestion_comboBox.getSelectionModel().getSelectedItem();
+        dbHandler.deleteQuestion(nameQuestion);
+
+        deleteTest_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_CHANGE_DROP_TEST);
     }
 
     private void deleteTest() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        nameTest = choiceTest_comboBox.getSelectionModel().getSelectedItem();
+        dbHandler.deleteTest(nameTest);
 
+        deleteTest_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_CHANGE_DROP_TEST);
     }
 
     private void goBack() {

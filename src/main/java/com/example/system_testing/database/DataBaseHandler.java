@@ -662,6 +662,40 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Удаление вопроса из БД.
+     * @param nameQuestion - название вопроса.
+     */
+    public void deleteQuestion(String nameQuestion) {
+        int questionID = getQuestionID(nameQuestion);
+
+        String deleteBD = "DELETE FROM " + ConstTables.QUESTIONS_TABLE + " WHERE " +
+                ConstTables.QUESTIONS_ID + " = " + questionID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Удаление теста из БД.
+     * @param nameTest - название теста
+     */
+    public void deleteTest(String nameTest) {
+        int testID = getTestID(nameTest);
+
+        String deleteBD = "DELETE FROM " + ConstTables.TESTS_TABLE + " WHERE " +
+                ConstTables.TESTS_ID + " = " + testID;
+        try {
+            PreparedStatement prSt1 = getDbConnection().prepareStatement(deleteBD);
+            prSt1.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Добавление группы в БД.
      * @param group - номер группы.
      */
@@ -856,4 +890,45 @@ public class DataBaseHandler extends Configs {
 
         return question;
     }
+
+    /**
+     * Создание Теста из БД
+     * @param nameTest - название теста
+     * @return - объект Тест.
+     */
+    public Test getTest(String nameTest) {
+        int testID = getTestID(nameTest);
+        Test test = new Test(nameTest);
+        ResultSet resultSet = null;
+        String selectBD = "SELECT " + ConstTables.TESTS_NAME + " FROM " + ConstTables.TESTS_TABLE +
+                " WHERE " + ConstTables.TESTS_ID + " = " + testID;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                test = new Test(resultSet.getString(ConstTables.TESTS_NAME));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return test;
+    }
+
 }
