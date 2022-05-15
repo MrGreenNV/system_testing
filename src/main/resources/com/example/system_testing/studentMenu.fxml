@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #2E3348;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.system_testing.controller.StudentMenuController">
     <children>
@@ -18,6 +19,7 @@
                 <Button fx:id="exitFromSystem_button" layoutX="223.0" layoutY="195.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="225.0" text="Выйти из системы" />
                 <Button fx:id="passTest_button" layoutX="223.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="225.0" text="Пройти тест" />
             <ComboBox fx:id="choiceTest_comboBox" editable="true" layoutX="223.0" layoutY="75.0" onAction="#selectTest" prefHeight="25.0" prefWidth="225.0" promptText="Выберите тест" />
+            <Text fx:id="userID_text" layoutX="68.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">

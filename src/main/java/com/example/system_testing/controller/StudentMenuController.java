@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,9 @@ public class StudentMenuController {
     WorkWithScene ws = new WorkWithScene();
     String nameTest;
     int userID;
+
+    @FXML
+    private Text userID_text;
 
     @FXML
     private ComboBox<String> choiceTest_comboBox;
@@ -32,11 +36,12 @@ public class StudentMenuController {
         nameTest = choiceTest_comboBox.getSelectionModel().getSelectedItem();
     }
 
+
+
     @FXML
     void initialize() {
 
-        ObservableList<String> testsList = FXCollections.observableArrayList(choiceTest());
-        choiceTest_comboBox.setItems(testsList);
+
 
         passTest_button.setOnAction(event -> {
             goToWindowPassTest();
@@ -60,11 +65,13 @@ public class StudentMenuController {
 
     private ArrayList<String> choiceTest() {
         DataBaseHandler dbHandler = new DataBaseHandler();
-        return dbHandler.getTestList();
+        return dbHandler.getTestListFromGroup(userID);
     }
 
     public void setUserID(int id) {
-        userID = id;
+        this.userID = id;
+        ObservableList<String> testsList = FXCollections.observableArrayList(choiceTest());
+        choiceTest_comboBox.setItems(testsList);
     }
 
 }

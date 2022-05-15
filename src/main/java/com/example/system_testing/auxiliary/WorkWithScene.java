@@ -54,13 +54,14 @@ public class WorkWithScene {
     }
 
     public void getNewWindow (String window, int id) {
-
         DataBaseHandler dbHandler = new DataBaseHandler();
         FXMLLoader loader = new FXMLLoader();
+
         loader.setLocation(getClass().getResource(ConstTables.URL_PACKAGE + window));
 
         try {
             loader.load();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +72,6 @@ public class WorkWithScene {
         stage.setScene(new Scene(root));
 
         String userRole = dbHandler.getUserRole(id);
-
         if (userRole.equals("teacher")) {
             TeacherMenuController teacherMenuController = loader.getController();
             teacherMenuController.setUserID(id);
@@ -81,6 +81,7 @@ public class WorkWithScene {
         }
 
         stage.show();
+
     }
 
     public void getNewWindow (String window, ArrayList<String> list) {

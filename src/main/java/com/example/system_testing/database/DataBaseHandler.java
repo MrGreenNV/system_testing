@@ -5,6 +5,7 @@ import com.example.system_testing.essences.*;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DataBaseHandler extends Configs {
     Connection dbConnection;
@@ -241,6 +242,57 @@ public class DataBaseHandler extends Configs {
         }
 
         return list;
+    }
+
+    /**
+     * Получение списка тестов назначенных студенту, определенной группы.
+     * @param userID - ID пользователя.
+     * @return - возвращает список тестов.
+     */
+    public ArrayList<String> getTestListFromGroup(int userID) {
+        int groupID = getGroupID(userID);
+
+        ResultSet resultSet = null;
+        ArrayList<Integer> list = new ArrayList<>();
+        String selectBD = "SELECT " + ConstTables.SCHEDULES_TESTES_ID + ", " + ConstTables.SCHEDULES_DATE +
+                " FROM " + ConstTables.SCHEDULES_TABLE +
+                " WHERE " + ConstTables.SCHEDULES_GROUPS_ID + " = " + groupID;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Date date = resultSet.getDate(ConstTables.SCHEDULES_DATE);
+                Date dateNow = new Date();
+
+                if (date.after(dateNow)) {
+                    list.add(resultSet.getInt(ConstTables.SCHEDULES_TESTES_ID));
+                    System.out.println("Добавлен");
+                } else {
+                    System.out.println("не добавлен..");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(list);
+        return getTestList(list);
     }
 
     /**
@@ -525,6 +577,39 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Получение ID группы из БД
+     * @param userID - ID пользователя.
+     * @return - возвращает ID студента.
+     */
+    public int getGroupID(int userID) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.STUDENTS_TABLE +
+                " WHERE " + ConstTables.STUDENTS_USER_ID + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, userID);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(ConstTables.SCHEDULES_GROUPS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    /**
      * Получение ID дисциплины из БД.
      * @param discipline - название дисциплины.
      * @return - возвращает целое число.
@@ -621,6 +706,45 @@ public class DataBaseHandler extends Configs {
 
         }
         return id;
+    }
+
+    /**
+     * Получение списка имен тестов по ID тестов из БД.
+     * @param listID - список ID тестов.
+     * @return - возвращает список названий тестов.
+     */
+    public ArrayList<String> getTestList(ArrayList<Integer> listID) {
+        ArrayList<String> nameTestList = new ArrayList<>();
+        ResultSet resultSet = null;
+
+        for (int testID: listID
+             ) {
+            String selectBD = "SELECT * FROM " + ConstTables.TESTS_TABLE +
+                    " WHERE " + ConstTables.TESTS_ID + " =?";
+            try {
+                PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+                prSt.setInt(1, testID);
+                resultSet = prSt.executeQuery();
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (true) {
+                try {
+                    if (!resultSet.next()) break;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    nameTestList.add(resultSet.getString(ConstTables.TESTS_NAME));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+
+        return nameTestList;
     }
 
     /**

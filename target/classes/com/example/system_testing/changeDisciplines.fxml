@@ -18,8 +18,8 @@
                     </font>
                 </Label>
             <TextField fx:id="nameDiscipline_textField" layoutX="128.0" layoutY="87.0" prefHeight="25.0" prefWidth="149.0" promptText="Название" />
-            <Button fx:id="addDiscipline_button" layoutX="128.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Добавить дисциплину" />
-            <Button fx:id="deleteDiscipline_button" layoutX="396.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Удалить дисциплину" />
+            <Button fx:id="addDiscipline_button" disable="true" layoutX="128.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Добавить дисциплину" />
+            <Button fx:id="deleteDiscipline_button" disable="true" layoutX="396.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Удалить дисциплину" />
             <ComboBox fx:id="choiceDiscipline_comboBox" editable="true" layoutX="395.0" layoutY="87.0" prefWidth="150.0" promptText="Дисциплина" />
             </children>
         </AnchorPane>

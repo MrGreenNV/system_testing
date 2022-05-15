@@ -1,8 +1,6 @@
 package com.example.system_testing.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
@@ -17,12 +15,6 @@ import javafx.scene.control.TextField;
 public class ChangeDisciplinesController {
 
     WorkWithScene ws = new WorkWithScene();
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button addDiscipline_button;
@@ -45,7 +37,22 @@ public class ChangeDisciplinesController {
         ObservableList<String> disciplinesList = FXCollections.observableArrayList(choiceDisciplines());
         choiceDiscipline_comboBox.setItems(disciplinesList);
 
+        choiceDiscipline_comboBox.setOnAction(event -> {
+
+            if(!(choiceDiscipline_comboBox.getSelectionModel().getSelectedItem().equals(""))) {
+                deleteDiscipline_button.setDisable(false);
+            }
+        });
+
+        nameDiscipline_textField.setOnAction(event -> {
+            String str = nameDiscipline_textField.getText();
+            if (!(str.equals(""))) {
+                addDiscipline_button.setDisable(false);
+            }
+        });
+
         addDiscipline_button.setOnAction(event -> {
+
             addDisciplineToBD();
             addDiscipline_button.getScene().getWindow().hide();
             ws.getNewWindow(ConstNameWindows.WINDOW_ADMINISTRATOR_MENU);
@@ -85,6 +92,5 @@ public class ChangeDisciplinesController {
         DataBaseHandler dbHandler = new DataBaseHandler();
         return dbHandler.getDisciplinesList();
     }
-
 }
 
