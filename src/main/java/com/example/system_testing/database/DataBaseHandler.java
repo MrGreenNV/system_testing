@@ -165,6 +165,79 @@ public class DataBaseHandler extends Configs {
         return list;
     }
 
+    public ArrayList<String> getQuestionsList(String nameTest) {
+        int testID = getTestID(nameTest);
+        ResultSet resultSet = null;
+        ArrayList<String> list = new ArrayList<>();
+        String selectBD = "SELECT " + ConstTables.QUESTIONS_NAME + " FROM " + ConstTables.QUESTIONS_TABLE +
+                " WHERE " + ConstTables.QUESTIONS_TESTES_ID + " = " + testID;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                //assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                list.add(resultSet.getString(ConstTables.QUESTIONS_NAME));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
+    /**
+     * Получение списка тестов из БД.
+     * @return - возвращает список тестов.
+     */
+    public ArrayList<String> getTestList() {
+
+        ResultSet resultSet = null;
+        ArrayList<String> list = new ArrayList<>();
+        String selectBD = "SELECT " + ConstTables.TESTS_NAME + " FROM " + ConstTables.TESTS_TABLE;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                list.add(resultSet.getString(ConstTables.TESTS_NAME));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
     /**
      * Запись данных пользователя в БД.
      * @param user - пользователь.
@@ -486,6 +559,11 @@ public class DataBaseHandler extends Configs {
         return id;
     }
 
+    /**
+     * Получение ID вопроса из БД.
+     * @param nameQuestion - наименование вопроса.
+     * @return - возвращает ID вопроса.
+     */
     public int getQuestionID(String nameQuestion) {
         int id = -1;
         ResultSet resultSet = null;
@@ -728,5 +806,54 @@ public class DataBaseHandler extends Configs {
 
         return disciplinesList;
 
+    }
+
+    /**
+     * Создание Вопроса из БД с заполненными ответами.
+     * @param nameQuestion - имя вопроса.
+     * @return - возвращает вопрос.
+     */
+    public Question getQuestion(String nameQuestion) {
+
+        int questionID = getQuestionID(nameQuestion);
+        Question question = new Question(nameQuestion);
+        ResultSet resultSet = null;
+        ArrayList<String> answerNameList = new ArrayList<>();
+        ArrayList<Boolean> answerIsTrueList = new ArrayList<>();
+        String selectBD = "SELECT " + ConstTables.ANSWERS_NAME + ", " + ConstTables.ANSWERS_IS_TRUE + " FROM " + ConstTables.ANSWERS_TABLE +
+                " WHERE " + ConstTables.ANSWERS_QUESTION_ID + " = " + questionID;
+        PreparedStatement prSt;
+
+        try {
+            prSt = getDbConnection().prepareStatement(selectBD);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        while (true) {
+            try {
+                assert resultSet != null;
+                if (!resultSet.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                answerNameList.add(resultSet.getString(ConstTables.ANSWERS_NAME));
+                answerIsTrueList.add(resultSet.getBoolean(ConstTables.ANSWERS_IS_TRUE));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        question.addAnswer(new Answer(answerNameList.get(0), answerIsTrueList.get(0)));
+        question.addAnswer(new Answer(answerNameList.get(1), answerIsTrueList.get(1)));
+        question.addAnswer(new Answer(answerNameList.get(2), answerIsTrueList.get(2)));
+        question.addAnswer(new Answer(answerNameList.get(3), answerIsTrueList.get(3)));
+
+        return question;
     }
 }
