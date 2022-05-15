@@ -165,6 +165,11 @@ public class DataBaseHandler extends Configs {
         return list;
     }
 
+    /**
+     * Получение списка вопросов из БД.
+     * @param nameTest - имя теста
+     * @return - возвращает список вопросов.
+     */
     public ArrayList<String> getQuestionsList(String nameTest) {
         int testID = getTestID(nameTest);
         ResultSet resultSet = null;
@@ -487,6 +492,39 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Получение ID студента из БД
+     * @param userID - ID пользователя.
+     * @return - возвращает ID студента.
+     */
+    public int getStudentID(int userID) {
+        int id = -1;
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.STUDENTS_TABLE +
+                " WHERE " + ConstTables.STUDENTS_USER_ID + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, userID);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                id = resultSet.getInt(ConstTables.STUDENTS_ID);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return id;
+    }
+
+    /**
      * Получение ID дисциплины из БД.
      * @param discipline - название дисциплины.
      * @return - возвращает целое число.
@@ -616,6 +654,39 @@ public class DataBaseHandler extends Configs {
 
         }
         return id;
+    }
+
+    /**
+     * Получение роли пользователя из БД.
+     * @param id - ID пользователя.
+     * @return - возвращает роль пользователя.
+     */
+    public String getUserRole(int id) {
+        String userRole = "";
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.USERS_TABLE +
+                " WHERE " + ConstTables.USERS_ID + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, id);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                userRole = resultSet.getString(ConstTables.USERS_ROLE);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return userRole;
     }
 
     /**
@@ -955,5 +1026,31 @@ public class DataBaseHandler extends Configs {
         }
 
         return test;
+    }
+
+    /**
+     * Запись оценки в БД.
+     * @param nameTest - название теста
+     * @param userID - ID пользователя
+     * @param assessment - оценка за тест.
+     */
+    public void addAssessmentInBD(String nameTest, int userID, int assessment) {
+        int studentID = getStudentID(userID);
+        int testID = getTestID(nameTest);
+        String insertDB = "INSERT INTO " + ConstTables.ASSESSMENTS_TABLE + "(" + ConstTables.ASSESSMENTS_ASSESSMENT + ", "
+                + ConstTables.ASSESSMENTS_STUDENT_ID + ", " + ConstTables.ASSESSMENTS_TESTES_ID + ")" + "VALUES(?,?,?)";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insertDB);
+
+            prSt.setInt(1, assessment);
+            prSt.setInt(2, studentID);
+            prSt.setInt(3, testID);
+
+            prSt.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

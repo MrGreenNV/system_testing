@@ -87,7 +87,7 @@ public class AuthenticationController {
                 } else if (resultSet.getString(ConstTables.USERS_ROLE).equalsIgnoreCase("student")) {
                     authSigIn_button.getScene().getWindow().hide();
                     counter++;
-                    ws.getNewWindow(ConstNameWindows.WINDOW_STUDENT_MENU);
+                    ws.getNewWindow(ConstNameWindows.WINDOW_STUDENT_MENU, resultSet.getInt(ConstTables.USERS_ID));
                 }
 
             } catch (SQLException e) {

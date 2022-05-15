@@ -16,5 +16,6 @@ public class ConstNameWindows {
     public static final String WINDOW_CHANGE_DROP_TEST = "changeDropTest.fxml";
     public static final String WINDOW_CREATE_NEW_TEST = "createNewTest.fxml";
     public static final String WINDOW_CREATE_QUESTION = "createQuestion.fxml";
+    public static final String WINDOW_PASS_TEST = "passTest.fxml";
 
 }

@@ -1,25 +1,25 @@
 package com.example.system_testing.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import com.example.system_testing.auxiliary.ConstNameWindows;
+import com.example.system_testing.auxiliary.WorkWithScene;
+import com.example.system_testing.database.DataBaseHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.ComboBox;
+
+import java.util.ArrayList;
 
 public class StudentMenuController {
 
-    @FXML
-    private ResourceBundle resources;
+    WorkWithScene ws = new WorkWithScene();
+    String nameTest;
+    int userID;
 
     @FXML
-    private URL location;
-
-    @FXML
-    private AnchorPane ImageButtonHome;
-
-    @FXML
-    private MenuButton choiceTest_menuButton;
+    private ComboBox<String> choiceTest_comboBox;
 
     @FXML
     private Button exitFromSystem_button;
@@ -28,8 +28,43 @@ public class StudentMenuController {
     private Button passTest_button;
 
     @FXML
+    void selectTest(ActionEvent event) {
+        nameTest = choiceTest_comboBox.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
     void initialize() {
 
+        ObservableList<String> testsList = FXCollections.observableArrayList(choiceTest());
+        choiceTest_comboBox.setItems(testsList);
+
+        passTest_button.setOnAction(event -> {
+            goToWindowPassTest();
+        });
+
+        exitFromSystem_button.setOnAction(event -> {
+            exitFromSystem();
+        });
+
+    }
+
+    private void exitFromSystem() {
+        exitFromSystem_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_AUTHENTICATION);
+    }
+
+    private void goToWindowPassTest() {
+        passTest_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_PASS_TEST, nameTest, userID);
+    }
+
+    private ArrayList<String> choiceTest() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        return dbHandler.getTestList();
+    }
+
+    public void setUserID(int id) {
+        userID = id;
     }
 
 }

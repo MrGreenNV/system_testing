@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Test {
     private String nameTest;
     private String discipline;
-    private ArrayList<Question> questionList;
+    private ArrayList<Question> questionList = new ArrayList<>();
 
     public Test() {
     }
