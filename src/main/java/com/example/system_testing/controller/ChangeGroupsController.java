@@ -45,6 +45,19 @@ public class ChangeGroupsController {
         ObservableList<String> groupsList = FXCollections.observableArrayList(choiceGroups());
         choiceGroup_comboBox.setItems(groupsList);
 
+        choiceGroup_comboBox.setOnAction(event -> {
+            if (!(choiceGroup_comboBox.getSelectionModel().getSelectedItem().equals(""))) {
+                deleteGroup_button.setDisable(false);
+            }
+        });
+
+        nameGroup_textField.setOnAction(event -> {
+            String str = nameGroup_textField.getText();
+            if (!(str.equals(""))) {
+                addGroup_button.setDisable(false);
+            }
+        });
+
         addGroup_button.setOnAction(event -> {
             addGroupToBD();
             addGroup_button.getScene().getWindow().hide();
@@ -62,16 +75,16 @@ public class ChangeGroupsController {
         });
     }
 
-    private void addGroupToBD() {
-        DataBaseHandler dbHandler = new DataBaseHandler();
-        String group = nameGroup_textField.getText();
-        dbHandler.addGroup(group);
-    }
-
     private void delete() {
         DataBaseHandler dbHandler = new DataBaseHandler();
         String group = choiceGroup_comboBox.getSelectionModel().getSelectedItem();
         dbHandler.deleteGroup(group);
+    }
+
+    private void addGroupToBD() {
+        DataBaseHandler dbHandler = new DataBaseHandler();
+        String group = nameGroup_textField.getText();
+        dbHandler.addGroup(group);
     }
 
     private void goBack() {

@@ -55,6 +55,9 @@ public class ShowResultTestController {
     @FXML
     void pushShowResult(ActionEvent event) {
         showResult();
+
+        choiceTest_comboBox.setDisable(true);
+        showResult_button.setDisable(true);
     }
 
     @FXML
@@ -130,6 +133,8 @@ public class ShowResultTestController {
             System.out.println(resultTest.getNameTest());
             System.out.println(resultTest.getAverageAssessment());
         }
+
+
 
     }
 
