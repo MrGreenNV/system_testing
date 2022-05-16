@@ -643,6 +643,27 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Поиск данных студентов из заданной группы.
+     * @param numberGroup - номер группы.
+     * @return - возвращает результат поиска.
+     */
+    public ResultSet getStudentsFromGroup(String numberGroup) {
+        ResultSet resultSet = null;
+
+        String selectDB = "SELECT * FROM " + ConstTables.STUDENTS_TABLE +
+                " WHERE " + ConstTables.STUDENTS_GROUPS_ID + " = " + getGroupID(numberGroup);
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectDB);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return resultSet;
+    }
+
+    /**
      * Получение ID группы из БД.
      * @param group - номер группы
      * @return - возвращает целое число.
@@ -1176,5 +1197,65 @@ public class DataBaseHandler extends Configs {
             e.printStackTrace();
         }
 
+    }
+
+    public ResultTest showResult(String numberGroup, String nameTest) {
+
+        ResultSet resultSetStudentsFromGroup = getStudentsFromGroup(numberGroup);
+        ResultTest resultTest;
+        int countStudentsPassTest = 0;
+        int sumAssessments = 0;
+        int testID = getTestID(nameTest);
+        double averageAssessment;
+
+        while (true) {
+            try {
+                if (!resultSetStudentsFromGroup.next()) {
+                    break;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                ResultSet resultSetStudentAssessment = getStudentAssessment(testID, resultSetStudentsFromGroup.getInt(ConstTables.STUDENTS_ID));
+                sumAssessments += resultSetStudentAssessment.getInt(ConstTables.ASSESSMENTS_ASSESSMENT);
+                countStudentsPassTest++;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        averageAssessment = (double)sumAssessments / (double)countStudentsPassTest;
+        resultTest = new ResultTest(numberGroup, nameTest, averageAssessment);
+
+        return resultTest;
+    }
+
+    /**
+     * Поиск результата студента за определённый тест.
+     * @param testID - ID теста.
+     * @param studentID - ID студента.
+     * @return - возвращает результат студента.
+     */
+    public ResultSet getStudentAssessment(int testID, int studentID) {
+        ResultSet resultSet = null;
+
+        String selectDB = "SELECT * FROM " + ConstTables.ASSESSMENTS_TABLE +
+                " WHERE " + ConstTables.ASSESSMENTS_STUDENT_ID + "=? AND " + ConstTables.ASSESSMENTS_TESTES_ID + "=?";
+
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectDB);
+            prSt.setInt(1, studentID);
+            prSt.setInt(2, testID);
+
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return resultSet;
     }
 }

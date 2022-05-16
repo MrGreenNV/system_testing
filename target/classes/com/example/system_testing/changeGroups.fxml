@@ -17,10 +17,10 @@
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nameGroup_textField" layoutX="128.0" layoutY="136.0" prefHeight="25.0" prefWidth="149.0" promptText="Название" />
-                <Button fx:id="addGroup_button" layoutX="128.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Добавить группу" />
-                <Button fx:id="deleteGroup_button" layoutX="395.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Удалить группу" />
-            <ComboBox fx:id="choiceGroup_comboBox" editable="true" layoutX="395.0" layoutY="136.0" prefWidth="150.0" promptText="Группа" />
+                <TextField fx:id="nameGroup_textField" layoutX="128.0" layoutY="87.0" prefHeight="25.0" prefWidth="149.0" promptText="Название" />
+                <Button fx:id="addGroup_button" layoutX="128.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Добавить группу" />
+                <Button fx:id="deleteGroup_button" layoutX="397.0" layoutY="136.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Удалить группу" />
+            <ComboBox fx:id="choiceGroup_comboBox" editable="true" layoutX="396.0" layoutY="87.0" prefWidth="150.0" promptText="Группа" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">
