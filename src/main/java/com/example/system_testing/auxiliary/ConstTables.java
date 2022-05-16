@@ -1,14 +1,11 @@
 package com.example.system_testing.auxiliary;
 
 /**
- * Константы.
+ * Класс содержит константы всех имён таблиц и столбцов.
  */
 
 public class ConstTables {
 
-    /**
-     * Названия таблиц и их колонок.
-     */
     public static final String URL_PACKAGE = "/com/example/system_testing/";
 
     public static final String USERS_TABLE = "tbl_users";

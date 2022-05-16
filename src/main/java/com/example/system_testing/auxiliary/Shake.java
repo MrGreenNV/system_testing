@@ -4,6 +4,10 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/**
+ * Класс позволяет создать объект с вызовом функции анимации.
+ */
+
 public class Shake {
     private TranslateTransition tt;
 

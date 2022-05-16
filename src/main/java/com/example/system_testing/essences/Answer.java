@@ -1,5 +1,9 @@
 package com.example.system_testing.essences;
 
+/**
+ * Класс для создания объекта - Ответ.
+ */
+
 public class Answer {
     private String nameAnswer;
     boolean isTrueAnswer = false;

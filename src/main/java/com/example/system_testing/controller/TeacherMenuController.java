@@ -3,11 +3,13 @@ package com.example.system_testing.controller;
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
-import com.example.system_testing.essences.Teacher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
 import java.util.ArrayList;
+
+/**
+ * Класс - контроллер, для управления формой меню преподавателя.
+ */
 
 public class TeacherMenuController {
 
@@ -77,5 +79,4 @@ public class TeacherMenuController {
         disciplinesList = dbHandler.getDisciplinesListFromTeacher(disciplinesList, userID);
         return disciplinesList;
     }
-
 }

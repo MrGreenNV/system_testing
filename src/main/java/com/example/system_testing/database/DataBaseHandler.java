@@ -2,14 +2,16 @@ package com.example.system_testing.database;
 
 import com.example.system_testing.auxiliary.ConstTables;
 import com.example.system_testing.essences.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Класс с методами для соединения и взаимодействия с таблицами базы данных..
+ */
+
 public class DataBaseHandler extends Configs {
     Connection dbConnection;
-
 
     /**
      * Подключение к БД.
@@ -1159,40 +1161,6 @@ public class DataBaseHandler extends Configs {
 
         }
         return assessment;
-    }
-
-    public ResultTest showResult(String numberGroup, String nameTest) {
-
-        ResultSet resultSetStudentsFromGroup = getStudentsFromGroup(numberGroup);
-        ResultTest resultTest;
-        int countStudentsPassTest = 0;
-        int sumAssessments = 0;
-        int testID = getTestID(nameTest);
-        double averageAssessment;
-
-        while (true) {
-            try {
-                if (!resultSetStudentsFromGroup.next()) {
-                    break;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                ResultSet resultSetStudentAssessment = getStudentAssessment(testID, resultSetStudentsFromGroup.getInt(ConstTables.STUDENTS_ID));
-                sumAssessments += resultSetStudentAssessment.getInt(ConstTables.ASSESSMENTS_ASSESSMENT);
-                countStudentsPassTest++;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        averageAssessment = (double)sumAssessments / (double)countStudentsPassTest;
-        resultTest = new ResultTest(numberGroup, nameTest, averageAssessment);
-
-        return resultTest;
     }
 
     /**

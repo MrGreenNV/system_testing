@@ -1,7 +1,6 @@
 package com.example.system_testing.controller;
 
 import java.util.ArrayList;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -11,6 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+
+/**
+ * Класс - контроллер, для управления формой изменения списка дисциплин: добавление новой / удаление существующей.
+ */
 
 public class ChangeDisciplinesController {
 
@@ -74,7 +77,6 @@ public class ChangeDisciplinesController {
         DataBaseHandler dbHandler = new DataBaseHandler();
         String discipline = choiceDiscipline_comboBox.getSelectionModel().getSelectedItem();
         dbHandler.deleteDiscipline(discipline);
-
     }
 
     private void addDisciplineToBD() {

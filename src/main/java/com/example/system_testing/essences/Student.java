@@ -1,5 +1,9 @@
 package com.example.system_testing.essences;
 
+/**
+ * Класс для создания объекта - Студент.
+ */
+
 public class Student {
     private String fio;
     private String group;

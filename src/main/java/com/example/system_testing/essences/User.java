@@ -1,5 +1,9 @@
 package com.example.system_testing.essences;
 
+/**
+ * Класс для создания объекта - Пользователь.
+ */
+
 public class User {
     private String userLogin;
     private String userPassword;

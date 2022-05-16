@@ -9,18 +9,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.text.Text;
-
 import java.util.ArrayList;
+
+/**
+ * Класс - контроллер, для управления формой меню студента.
+ */
 
 public class StudentMenuController {
 
     WorkWithScene ws = new WorkWithScene();
     String nameTest;
     int userID;
-
-    @FXML
-    private Text userID_text;
 
     @FXML
     private ComboBox<String> choiceTest_comboBox;
@@ -36,12 +35,8 @@ public class StudentMenuController {
         nameTest = choiceTest_comboBox.getSelectionModel().getSelectedItem();
     }
 
-
-
     @FXML
     void initialize() {
-
-
 
         passTest_button.setOnAction(event -> {
             goToWindowPassTest();
@@ -73,5 +68,4 @@ public class StudentMenuController {
         ObservableList<String> testsList = FXCollections.observableArrayList(choiceTest());
         choiceTest_comboBox.setItems(testsList);
     }
-
 }

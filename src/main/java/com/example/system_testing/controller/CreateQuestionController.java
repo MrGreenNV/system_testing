@@ -11,6 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
+/**
+ * Класс - контроллер, для управления формой создания нового вопроса с ответами.
+ */
+
 public class CreateQuestionController {
     WorkWithScene ws = new WorkWithScene();
     Question question;
@@ -75,7 +79,6 @@ public class CreateQuestionController {
 
     public void saveQuestionInTest() {
         DataBaseHandler dbHandler = new DataBaseHandler();
-        //test.addQuestion(question);
         dbHandler.addQuestionInBD(test, question);
 
         saveQuestionInTest_button.getScene().getWindow().hide();
@@ -90,5 +93,4 @@ public class CreateQuestionController {
         exit_button.getScene().getWindow().hide();
         ws.getNewWindow(ConstNameWindows.WINDOW_TEACHER_MENU);
     }
-
 }

@@ -4,8 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+
+/**
+ * Главный класс, с которого начинается программа.
+ */
 
 public class Authentication extends Application {
     @Override
@@ -18,7 +21,6 @@ public class Authentication extends Application {
     }
 
     public static void main(String[] args) {
-
         launch();
     }
 }

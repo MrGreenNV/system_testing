@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * В классе содержатся методы для перехода между пользовательскими формами и передачи данных между ними.
+ */
+
 public class WorkWithScene {
 
     public void getNewWindow (String window) {

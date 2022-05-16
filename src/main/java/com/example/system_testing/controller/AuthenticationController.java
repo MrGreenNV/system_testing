@@ -2,7 +2,6 @@ package com.example.system_testing.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import com.example.system_testing.auxiliary.ConstTables;
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.Shake;
@@ -13,6 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+/**
+ * Класс - контроллер, для управления формой идентификации пользователя.
+ */
 
 public class AuthenticationController {
 
@@ -94,5 +97,4 @@ public class AuthenticationController {
             userPassAnim.playAnim();
         }
     }
-
 }

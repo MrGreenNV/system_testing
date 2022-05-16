@@ -1,5 +1,9 @@
 package com.example.system_testing.auxiliary;
 
+/**
+ * Класс содержит константы имён всех пользовательских окон формата fxml.
+ */
+
 public class ConstNameWindows {
 
     public static final String WINDOW_AUTHENTICATION = "authentication.fxml";

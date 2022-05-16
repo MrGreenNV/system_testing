@@ -1,7 +1,6 @@
 package com.example.system_testing.controller;
 
 import java.util.ArrayList;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -14,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- *
+ * Класс - контроллер, для управления формой просмотра результата прохождения теста группой.
  */
 
 public class ShowResultTestController {

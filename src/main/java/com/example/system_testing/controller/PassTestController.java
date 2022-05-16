@@ -1,11 +1,9 @@
 package com.example.system_testing.controller;
 
 import java.util.ArrayList;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
-import com.example.system_testing.essences.Question;
 import com.example.system_testing.essences.Test;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +11,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
 
+/**
+ * Класс - контроллер, для управления формой прохождения студентом теста.
+ */
+
 public class PassTestController {
 
     DataBaseHandler dbHandler = new DataBaseHandler();
     WorkWithScene ws = new WorkWithScene();
-    Question question;
     Test test = new Test();
     int userID;
 
@@ -95,7 +96,6 @@ public class PassTestController {
             count--;
 
         }
-
     }
 
     @FXML
@@ -140,11 +140,8 @@ public class PassTestController {
                     completedTest_button.getScene().getWindow().hide();
                     ws.getNewWindow(ConstNameWindows.WINDOW_STUDENT_MENU, userID);
                 });
-
             }
-
         }
-
     }
 
     private void calculatingResults(int count, Boolean answerOne, Boolean answerTwo, Boolean answerThree, Boolean answerFour) {
@@ -177,8 +174,6 @@ public class PassTestController {
             countQuestions++;
             count++;
         }
-
     }
-
 }
 

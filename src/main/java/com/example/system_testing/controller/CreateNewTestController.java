@@ -10,8 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-
 import java.util.ArrayList;
+
+/**
+ * Класс - контроллер, для управления формой по созданию новых тестов и добавления в них вопросов с ответами.
+ */
 
 public class CreateNewTestController {
 
@@ -39,11 +42,7 @@ public class CreateNewTestController {
         goBack_button.setOnAction(event -> {
             goBack();
         });
-    }
 
-    private ArrayList<String> choiceDisciplines() {
-        DataBaseHandler dbHandler = new DataBaseHandler();
-        return dbHandler.getDisciplinesList();
     }
 
     private void createNewTest() {
@@ -62,9 +61,7 @@ public class CreateNewTestController {
     }
 
     public void setDisciplinesList(ArrayList<String> list) {
-
         ObservableList<String> disciplinesList = FXCollections.observableArrayList(list);
         choiceDiscipline_comboBox.setItems(disciplinesList);
-
     }
 }

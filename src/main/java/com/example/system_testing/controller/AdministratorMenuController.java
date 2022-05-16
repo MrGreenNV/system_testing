@@ -5,6 +5,10 @@ import com.example.system_testing.auxiliary.WorkWithScene;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * Класс - контроллер, для управления формой меню администратора.
+ */
+
 public class AdministratorMenuController {
 
     WorkWithScene ws = new WorkWithScene();

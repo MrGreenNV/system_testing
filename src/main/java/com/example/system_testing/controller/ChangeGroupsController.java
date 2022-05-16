@@ -1,9 +1,6 @@
 package com.example.system_testing.controller;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -14,15 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+/**
+ * Класс - контроллер, для управления формой изменения списка групп студентов: добавление новой / удаление существующей.
+ */
+
 public class ChangeGroupsController {
 
     WorkWithScene ws = new WorkWithScene();
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button addGroup_button;

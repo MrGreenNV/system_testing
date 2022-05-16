@@ -1,5 +1,9 @@
 package com.example.system_testing.essences;
 
+/**
+ * Класс для создания объекта - Результат тестирования группы.
+ */
+
 public class ResultTest {
     private String numberGroup;
     private String nameTest;

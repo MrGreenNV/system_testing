@@ -1,7 +1,6 @@
 package com.example.system_testing.controller;
 
 import java.util.ArrayList;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -12,6 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+
+/**
+ * Класс - контроллер, для управления формой назначения даты теста.
+ */
 
 public class AppointDateTestController {
 

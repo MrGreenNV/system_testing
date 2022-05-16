@@ -2,6 +2,10 @@ package com.example.system_testing.essences;
 
 import java.util.ArrayList;
 
+/**
+ * Класс для создания объекта - Вопрос.
+ */
+
 public class Question {
     private String nameQuestion;
     private ArrayList<Answer> answerList = new ArrayList<>();

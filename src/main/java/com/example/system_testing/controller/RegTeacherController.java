@@ -1,7 +1,6 @@
 package com.example.system_testing.controller;
 
 import java.util.ArrayList;
-
 import com.example.system_testing.auxiliary.ConstNameWindows;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
@@ -13,14 +12,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+
+/**
+ * Класс - контроллер, для управления формой регистрации преподавателя в системе.
+ */
 
 public class RegTeacherController {
     ArrayList<String> list = new ArrayList<>();
     WorkWithScene ws = new WorkWithScene();
-
-    @FXML
-    private AnchorPane ImageButtonHome;
 
     @FXML
     private Button addDiscipline_button;
@@ -83,7 +82,5 @@ public class RegTeacherController {
             System.out.println("Где-то ошибка!");
         }
 
-
     }
-
 }
