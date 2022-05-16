@@ -27,6 +27,7 @@
             </TableView>
             <ComboBox fx:id="choiceGroup_comboBox" editable="true" layoutX="14.0" layoutY="15.0" prefHeight="25.0" prefWidth="127.0" promptText="Группа" />
             <ComboBox fx:id="choiceTest_comboBox" disable="true" editable="true" layoutX="14.0" layoutY="50.0" prefHeight="25.0" prefWidth="127.0" promptText="Тест" />
+            <Button fx:id="showResult_button" disable="true" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" onAction="#pushShowResult" prefHeight="25.0" prefWidth="127.0" text="Показать" />
             </children>
         </AnchorPane>
         <Label layoutX="177.0" layoutY="40.0" text="Система тестирования" textFill="WHITE">

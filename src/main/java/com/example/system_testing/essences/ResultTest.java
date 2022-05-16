@@ -14,6 +14,8 @@ public class ResultTest {
         this.averageAssessment = averageAssessment;
     }
 
+
+
     public String getNumberGroup() {
         return numberGroup;
     }
