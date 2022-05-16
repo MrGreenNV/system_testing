@@ -1,21 +1,21 @@
 package com.example.system_testing.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.example.system_testing.auxiliary.ConstNameWindows;
-import com.example.system_testing.auxiliary.ConstTables;
 import com.example.system_testing.auxiliary.WorkWithScene;
 import com.example.system_testing.database.DataBaseHandler;
 import com.example.system_testing.essences.ResultTest;
-import com.example.system_testing.essences.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+/**
+ *
+ */
 
 public class ShowResultTestController {
 
@@ -25,11 +25,8 @@ public class ShowResultTestController {
     String numberGroup;
     String nameTest;
 
-    Test test;
-    ResultTest resultTest = null;
-
     @FXML
-    private TableColumn<?, ?> averageAssessment_column;
+    private TableColumn<ResultTest, Double> averageAssessment_column;
 
     @FXML
     private ComboBox<String> choiceGroup_comboBox;
@@ -41,13 +38,13 @@ public class ShowResultTestController {
     private Button goBack_button;
 
     @FXML
-    private TableColumn<?, ?> nameTest_column;
+    private TableColumn<ResultTest, String> nameTest_column;
 
     @FXML
-    private TableColumn<?, ?> numGroup_column;
+    private TableColumn<ResultTest, String> numGroup_column;
 
     @FXML
-    private TableView<?> showResult_table;
+    private TableView<ResultTest> showResult_table;
 
     @FXML
     private Button showResult_button;
@@ -94,11 +91,6 @@ public class ShowResultTestController {
 
     private void showResult() {
 
-//        resultTest = dbHandler.showResult(numberGroup, nameTest);
-//        System.out.println(resultTest.getNumberGroup());
-//        System.out.println(resultTest.getNameTest());
-//        System.out.println(resultTest.getAverageAssessment());
-
         ArrayList<Integer> listStudentID;
         double averageAssessment = 0;
         int assessment;
@@ -116,8 +108,6 @@ public class ShowResultTestController {
              ) {
             assessment = dbHandler.getAssessmentBehindTest(studentID, testID);
             if (assessment >= 0) {
-                System.out.println("студент: " + studentID + " сдал тест: " + dbHandler.getNameTest(testID) +
-                        " на оценку: " + assessment);
                 countStudentsPassTest++;
                 sumAssessment += assessment;
             }
@@ -129,12 +119,15 @@ public class ShowResultTestController {
 
             ResultTest resultTest = new ResultTest(numberGroup, nameTest, averageAssessment);
 
-            System.out.println(resultTest.getNumberGroup());
-            System.out.println(resultTest.getNameTest());
-            System.out.println(resultTest.getAverageAssessment());
+            ObservableList<ResultTest> list = FXCollections.observableArrayList(resultTest);
+
+            numGroup_column.setCellValueFactory(new PropertyValueFactory<>("numberGroup"));
+            nameTest_column.setCellValueFactory(new PropertyValueFactory<>("nameTest"));
+            averageAssessment_column.setCellValueFactory(new PropertyValueFactory<>("averageAssessment"));
+
+            showResult_table.setItems(list);
+
         }
-
-
 
     }
 

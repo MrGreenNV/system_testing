@@ -1,9 +1,7 @@
 package com.example.system_testing.controller;
 
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 import com.example.system_testing.auxiliary.ConstTables;
 import com.example.system_testing.auxiliary.ConstNameWindows;
@@ -19,12 +17,6 @@ import javafx.scene.control.TextField;
 public class AuthenticationController {
 
     WorkWithScene ws = new WorkWithScene();
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button authSigIn_button;
