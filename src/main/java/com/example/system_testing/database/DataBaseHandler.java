@@ -15,7 +15,7 @@ public class DataBaseHandler extends Configs {
 
     /**
      * Подключение к БД.
-     * @return - возвращает драйвед для соединения.
+     * @return - возвращает драйвер для соединения.
      * @throws ClassNotFoundException - ошибочки.
      * @throws SQLException - ошибочки.
      */
@@ -829,6 +829,39 @@ public class DataBaseHandler extends Configs {
     }
 
     /**
+     * Получение имени студента по ID теста.
+     * @param studentID - ID студента.
+     * @return возвращает имя студента.
+     */
+    public String getNameStudent(int studentID) {
+        String nameStudent = "";
+        ResultSet resultSet = null;
+        String selectBD = "SELECT * FROM " + ConstTables.STUDENTS_TABLE +
+                " WHERE " + ConstTables.STUDENTS_ID + " =?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(selectBD);
+            prSt.setInt(1, studentID);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!resultSet.next()) break;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                nameStudent = resultSet.getString(ConstTables.STUDENTS_FIO);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return nameStudent;
+    }
+
+    /**
      * Получение строки из БД с логином и паролем пользователя.
      * @param user - пользователь.
      * @return - возвращает строку данных пользователя.
@@ -1383,4 +1416,5 @@ public class DataBaseHandler extends Configs {
             e.printStackTrace();
         }
     }
+
 }

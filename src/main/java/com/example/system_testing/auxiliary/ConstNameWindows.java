@@ -14,6 +14,7 @@ public class ConstNameWindows {
     public static final String WINDOW_REG_STUDENT = "regStudent.fxml";
     public static final String WINDOW_REG_TEACHER = "regTeacher.fxml";
     public static final String WINDOW_SHOW_RESULT_TEST = "showResultTest.fxml";
+    public static final String WINDOW_SHOW_RESULT_TEST_ITEM = "showResultTestItem.fxml";
     public static final String WINDOW_STUDENT_MENU = "studentMenu.fxml";
     public static final String WINDOW_TEACHER_MENU = "teacherMenu.fxml";
     public static final String WINDOW_APPOINT_DATE_TEST = "appointDateTest.fxml";

@@ -35,6 +35,9 @@ public class AdministratorMenuController {
     private Button showResultTest_button;
 
     @FXML
+    private Button showResultTestItem_button;
+
+    @FXML
     void initialize() {
 
         regTeacher_button.setOnAction(event -> {
@@ -65,6 +68,15 @@ public class AdministratorMenuController {
             exitFromSystem();
         });
 
+        showResultTestItem_button.setOnAction(event -> {
+            showResultTestItem();
+        });
+
+    }
+
+    private void showResultTestItem() {
+        showResultTestItem_button.getScene().getWindow().hide();
+        ws.getNewWindow(ConstNameWindows.WINDOW_SHOW_RESULT_TEST_ITEM);
     }
 
     private void regTeacher() {

@@ -12,7 +12,7 @@
         <AnchorPane layoutX="14.0" layoutY="115.0" prefHeight="271.0" prefWidth="671.0" style="-fx-background-color: #fafafa;">
             <children>
                 <Button fx:id="goBack_button" layoutX="261.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Назад" />
-                <Label layoutX="277.0" layoutY="32.0" text="Дисциплины">
+                <Label layoutX="301.0" layoutY="32.0" text="Группы">
                     <font>
                         <Font size="20.0" />
                     </font>

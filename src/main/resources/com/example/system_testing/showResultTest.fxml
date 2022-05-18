@@ -18,10 +18,10 @@
                     </font>
                 </Label>
                 <Button fx:id="goBack_button" layoutX="14.0" layoutY="232.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Назад" />
-            <TableView fx:id="showResult_table" layoutX="150.0" layoutY="83.0" prefHeight="105.0" prefWidth="507.0">
+            <TableView fx:id="showResult_table" layoutX="151.0" layoutY="105.0" prefHeight="62.0" prefWidth="507.0">
               <columns>
-                <TableColumn fx:id="numGroup_column" text="Группа" />
-                <TableColumn fx:id="nameTest_column" prefWidth="327.0" text="Тест" />
+                <TableColumn fx:id="numGroup_column" prefWidth="66.0" text="Группа" />
+                <TableColumn fx:id="nameTest_column" prefWidth="341.0" text="Тест" />
                   <TableColumn fx:id="averageAssessment_column" prefWidth="99.0" text="Средний балл" />
               </columns>
             </TableView>
